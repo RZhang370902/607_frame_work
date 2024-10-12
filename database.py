@@ -5,18 +5,10 @@ from sqlalchemy import text
 # Create a connection to the database
 
 
-'''
-with engine.connect() as connection:
-    result = connection.execute(text("SELECT * FROM jobs"))
-    for row in result:
-        print(row)
-
-'''
-
-
 class database:
     def __init__(self):
-        self.engine = create_engine('mysql+pymysql://egfwe479rau7ia8z:mgw5gfy1jf9qogm3@o677vxfi8ok6exrd.cbetxkdyhwsb.us-east-1.rds.amazonaws.com/n8ic4928wg3p4wnn?charset=utf8mb4')
+        # Iunput your connection string here
+        self.engine = create_engine('')
 
     def print_jobs(self):
         with self.engine.connect() as connection:

@@ -4,13 +4,21 @@ from flask import request
 from flask.json import jsonify
 from openai import OpenAI
 
+# Put your OpenAI API key here
 client = OpenAI(api_key="")
 
-#import sqlalchemy
-#from sqlalchemy import create_engine
-#from sqlalchemy import text
 
-from database import database
+# To make database related code work, go to database.py to add
+# MySQL connection string and uncomment the code below
+#from database import database
+
+jobs_1 = [
+    {'id': 1, 'title': 'Software Developer', 'location': 'Calgary', 'salary': 100000},
+    {'id': 2, 'title': 'Data Analyst', 'location': 'Toronto', 'salary': 80000}]
+
+
+
+# App starts here
 
 app = Flask(__name__)
 
@@ -19,8 +27,9 @@ home_title = 'ENSF607/608 Planning a Vacation'
 # 1. consider change face icon
 @app.route('/')
 def hello_world():
-  jobs = database().load_jobs_dicts_from_db()
-  return render_template('home.html', jobs=jobs, title=home_title)
+  # to use database realted code, follow the instructions on line 11
+  #jobs = database().load_jobs_dicts_from_db()
+  return render_template('home.html', jobs=jobs_1, title=home_title)
 
 
 @app.route('/plan', methods=['POST'])
