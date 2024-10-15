@@ -1,14 +1,26 @@
+import os
+from dotenv import load_dotenv
 import sqlalchemy
-from sqlalchemy import create_engine
-from sqlalchemy import text
+from sqlalchemy import create_engine, text
+
+load_dotenv()
 
 # Create a connection to the database
-
-
 class database:
     def __init__(self):
-        # Iunput your connection string here
-        self.engine = create_engine('')
+        # Read the connection string components from the .env file
+        user = os.getenv('DB_USER')
+        password = os.getenv('DB_PASSWORD')
+        host = os.getenv('DB_HOST')
+        port = os.getenv('DB_PORT')
+        dbname = os.getenv('DB_NAME')
+
+        # Format the connection string
+        connection_string = f'mysql+pymysql://{user}:{password}@{host}:{port}/{dbname}'
+        
+        # Create the engine using the connection string
+        self.engine = create_engine(connection_string)
+        
 
     def print_jobs(self):
         with self.engine.connect() as connection:

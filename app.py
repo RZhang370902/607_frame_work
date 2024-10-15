@@ -3,14 +3,18 @@ from flask.templating import render_template
 from flask import request
 from flask.json import jsonify
 from openai import OpenAI
+import os
+from dotenv import load_dotenv
+
+load_dotenv() 
 
 # Put your OpenAI API key here
-client = OpenAI(api_key="")
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 
 # To make database related code work, go to database.py to add
 # MySQL connection string and uncomment the code below
-#from database import database
+from database import database
 
 jobs_1 = [
     {'id': 1, 'title': 'Software Developer', 'location': 'Calgary', 'salary': 100000},
